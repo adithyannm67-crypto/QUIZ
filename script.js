@@ -1094,114 +1094,11 @@ function selectOption(index) {
     .forEach((opt, i) => opt.classList.toggle("selected", i === index));
 }
 
-function previousQuestion() {
-  if (currentQuestionIndex > 0) {
-    currentQuestionIndex--;
-    displayQuestion();
-  }
-}
 
-function nextQuestion() {
-  if (currentQuestionIndex < currentQuiz.length - 1) {
-    currentQuestionIndex++;
-    displayQuestion();
-  } else submitQuiz();
-}
 
-function submitQuiz() {
-  clearInterval(timerInterval);
-  const correct = currentQuiz.filter(
-    (q, i) => selectedAnswers[i] === q.correct,
-  ).length;
-  const totalSecs = Math.floor((Date.now() - startTime) / 1000);
-  const mins = Math.floor(totalSecs / 60),
-    secs = totalSecs % 60;
-  const percentage = Math.round((correct / currentQuiz.length) * 100);
-  const timeTakenStr = mins + "m " + secs + "s";
-  const exam = document
-    .getElementById("quizTitle")
-    .textContent.split(" - ")[0]
-    .toLowerCase();
-  const subject = document
-    .getElementById("quizTitle")
-    .textContent.split(" - ")[1]
-    .replace(" Quiz", "")
-    .toLowerCase();
 
-  const history = JSON.parse(localStorage.getItem("quizHistory") || "[]");
-  history.push({
-    exam,
-    subject,
-    total: currentQuiz.length,
-    correct,
-    wrong: currentQuiz.length - correct,
-    percentage,
-    timeTaken: timeTakenStr,
-    date: new Date().toISOString(),
-  });
-  localStorage.setItem("quizHistory", JSON.stringify(history));
 
-  document.getElementById("scoreText").textContent = percentage + "%";
-  document.getElementById("totalQuestions").textContent = currentQuiz.length;
-  document.getElementById("correctCount").textContent = correct;
-  document.getElementById("wrongCount").textContent =
-    currentQuiz.length - correct;
-  document.getElementById("timeTaken").textContent = timeTakenStr;
-  document.getElementById("percentage").textContent = percentage + "%";
-  document.getElementById("quizBody").style.display = "none";
-  document.getElementById("resultsContainer").style.display = "block";
-}
 
-function showAnswers() {
-  document.getElementById("resultsContainer").style.display = "none";
-  document.getElementById("answersContainer").style.display = "block";
-
-  document.getElementById("answersGrid").innerHTML = currentQuiz
-    .map((q, i) => {
-      const userAnswer = selectedAnswers[i];
-      const isCorrect = userAnswer === q.correct;
-      const optionsHTML = q.options
-        .map((opt, j) => {
-          const cls =
-            j === q.correct
-              ? "correct-answer"
-              : j === userAnswer && !isCorrect
-                ? "user-wrong"
-                : "";
-          const marker =
-            j === q.correct ? "✓ " : j === userAnswer && !isCorrect ? "✗ " : "";
-          return (
-            '<div class="answer-option ' + cls + '">' + marker + opt + "</div>"
-          );
-        })
-        .join("");
-      return (
-        '<div class="answer-item ' +
-        (isCorrect ? "correct" : "wrong") +
-        '">' +
-        '<div class="answer-question">' +
-        (isCorrect ? "✅" : "❌") +
-        " <strong>Q" +
-        (i + 1) +
-        ":</strong> " +
-        q.question +
-        "</div>" +
-        '<div class="answer-options">' +
-        optionsHTML +
-        "</div>" +
-        '<div class="explanation-box"><span class="explanation-label">💡 Explanation:</span><div>' +
-        q.explanation +
-        "</div></div>" +
-        "</div>"
-      );
-    })
-    .join("");
-}
-
-function backToResults() {
-  document.getElementById("answersContainer").style.display = "none";
-  document.getElementById("resultsContainer").style.display = "block";
-}
 
 // Close overlay when clicking outside the quiz box
 document.getElementById("quizOverlay").addEventListener("click", function (e) {
