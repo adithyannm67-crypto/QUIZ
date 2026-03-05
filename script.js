@@ -1094,9 +1094,6 @@ function selectOption(index) {
     .forEach((opt, i) => opt.classList.toggle("selected", i === index));
 }
 
-
-
-
 function previousQuestion() {
   if (currentQuestionIndex > 0) {
     currentQuestionIndex--;
@@ -1205,8 +1202,6 @@ function backToResults() {
   document.getElementById("answersContainer").style.display = "none";
   document.getElementById("resultsContainer").style.display = "block";
 }
-
-
 
 // Close overlay when clicking outside the quiz box
 document.getElementById("quizOverlay").addEventListener("click", function (e) {
