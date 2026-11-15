@@ -4,7 +4,7 @@ A lightweight, front-end-only quiz web app for exam practice. Pick an exam, choo
 
 ## Academic context
 
-This project was built as a subject project during my 2nd semester of B.Tech.
+This project was built as a subject mini project during my 2nd semester of B.Tech.
 
 ## Features
 
