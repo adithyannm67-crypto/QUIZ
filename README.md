@@ -84,7 +84,7 @@ To add a new exam, add a new key to `comprehensiveQuizData` and a matching card 
 
 ## Data and privacy
 
-Quiz history, streaks and the dark-mode preference are stored only in your browser's `localStorage`. Nothing is sent to a server. Clearing site data resets your analytics.
+Quiz history, streaks and the dark-mode preference are stored only in your browser's `localStorage`. Clearing site data resets your analytics.
 
 ## Possible improvements
 
@@ -95,4 +95,4 @@ Quiz history, streaks and the dark-mode preference are stored only in your brows
 
 ## License
 
-No license has been specified yet. Add a `LICENSE` file (for example, MIT) if you want others to reuse the code.
+No license has been specified yet.
